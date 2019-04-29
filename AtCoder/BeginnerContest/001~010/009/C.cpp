@@ -5,43 +5,33 @@ int main() {
   int n, k;
   string s;
   cin >> n >> k >> s;
+  vector<int> cnt(26);
+  for (int i = 0; i < n; i ++) cnt[s[i] - 'a'] ++;
 
-  if (k <= 1) {
-    cout << s << endl;
-    return 0;
-  }
+  string ans = "";
+  for (int i = 0; i < n; i ++) {
+    for (int j = 0; j < 26; j ++) {
+      if (cnt[j]) {
+        vector<int> tmp = cnt;
+        tmp[j] --;
+        int c = k;
+        for (int l = 0; l < ans.size(); l ++) {
+          if (ans[l] != s[l]) c --;
+        }
 
-  vector<char> a(s.size());
-  for (int i = 0; i < s.size(); i ++) a[i] = s[i];
-  sort(a.begin(), a.end());
-
-  string ans;
-  int j = 0, x = 0;
-  bool check[10], flag;
-  for (int i = 0; i < 10; i ++) check[i] = false;
-
-  for (int i = 0; i < s.size(); i ++) {
-    for ( ; j < a.size(); j ++) {
-      if (s[i] == s[j]) {
-        ans += s[i];
-        continue;
+        if (j != s[i] - 'a') c --;
+        
+        for (int l = i + 1; l < n; l ++) {
+          if (tmp[s[l] - 'a'] == 0) c --;
+          else tmp[s[l] - 'a'] --;
+        }
+        if (c >= 0) {
+          ans += (char)(j + 'a');
+          cnt[j] --;
+          break;
+        }
       }
-      
-      if (check[i]) {
-        ans += s[j];
-      } else {
-        ans += s[j];
-        check[i] = true;
-        x ++;
-      }
-
-      if (x == k) flag = true;
     }
-    if (flag) break;
-  }
-
-  if (s.size() > ans.size()) {
-    ans += s.substr(ans.size(), s.size() - ans.size());
   }
 
   cout << ans << endl;
