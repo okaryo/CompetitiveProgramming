@@ -6,19 +6,22 @@ int main() {
   LL n, p;
   cin >> n >> p;
 
-  LL i = 2, ans = 1;
-  while(true) {
-    LL tmpi = i;
-    LL tmp = pow(i, n);
-    if (tmp > p) break;
-    if (p % tmp == 0) {
-      p /= tmp;
-      ans *= i;
-      i = tmpi;
-      continue;
+  vector<pair<LL, LL>> a;
+  LL tmp = p;
+  for (LL i = 2; i * i <= p; i ++) {
+    if (tmp % i != 0) continue;
+    LL cnt = 0;
+    while (tmp % i == 0) {
+      cnt ++;
+      tmp /= i;
     }
-    i ++;
+    a.push_back(make_pair(i, cnt));
   }
+  if (tmp > 1) a.push_back(make_pair(tmp, 1));
 
+  LL ans = 1;
+  for (int i = 0; i < a.size(); i ++) {
+    for (int j = 0; j < a[i].second / n; j ++) ans *= a[i].first;
+  }
   cout << ans << endl;
 }
