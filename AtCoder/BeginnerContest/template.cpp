@@ -11,6 +11,8 @@ int gcd(int a, int b) {
   return b ? gcd(b, a % b) : a;
 }
 
+priority_queue<int, vector<int>, greater<int>> pq;
+
 int binarySearch (vector<int> a, int n, int key) {
   int left = 0;
   int right = n;
