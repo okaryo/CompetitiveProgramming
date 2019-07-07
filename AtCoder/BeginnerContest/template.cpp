@@ -26,6 +26,19 @@ int binarySearch (vector<int> a, int n, int key) {
   return 0;
 }
 
+int find_root(int x) {
+  if (p[x] != x) p[x] = find_root(p[x]);
+  return p[x];
+}
+
+void unite(int x, int y) {
+  int nx = find_root(x);
+  int ny = find_root(y);
+  if (nx == ny) return;
+  else if (nx > ny) p[nx] = ny;
+  else p[ny] = nx;
+}
+
 class DisjointSet {
   public:
     vector<int> rank, p;
