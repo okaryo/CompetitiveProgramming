@@ -35,8 +35,10 @@ void unite(int x, int y) {
   int nx = find_root(x);
   int ny = find_root(y);
   if (nx == ny) return;
-  else if (nx > ny) p[nx] = ny;
-  else p[ny] = nx;
+  else {
+    if (nx > ny) p[nx] = ny;
+    else p[ny] = nx;
+  }
 }
 
 class DisjointSet {
