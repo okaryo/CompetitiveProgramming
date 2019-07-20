@@ -2,28 +2,36 @@
 typedef long long LL;
 using namespace std;
 
-static const int MAX = 100010;
-vector<int> G[MAX];
+vector<int> p;
+int ans;
+
+int find_root(int x) {
+  if (p[x] != x) p[x] = find_root(p[x]);
+  return p[x];
+}
+
+void unite(int x, int y) {
+  int nx = find_root(x);
+  int ny = find_root(y);
+  if (nx == ny) return;
+  else {
+    if (nx > ny) p[nx] = ny;
+    else p[ny] = nx;
+    ans --;
+  }
+}
 
 int main() {
   int n, m;
   cin >> n >> m;
+  ans = n;
+  p = vector<int>(n);
+  for (int i = 0; i < n; i ++) p[i] = i;
   for (int i = 0; i < m; i ++) {
-    int a, b, c;
-    cin >> a >> b >> c;
-    a --, b --;
-    G[a].push_back(b);
-  }
-  int ans = n;
-  for (int i = 0; i < n; i ++) {
-    int t = G[i].size();
-    while (!G[i].empty()) {
-      int j = G[i].back();
-      G[i].pop_back();
-      t += G[j].size();
-      G[j].clear();
-    }
-    ans -= t - 1;
+    int x, y, z;
+    cin >> x >> y >> z;
+    x --, y --;
+    unite(x, y);
   }
   cout << ans << endl;
 }
