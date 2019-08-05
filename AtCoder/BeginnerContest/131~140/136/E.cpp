@@ -5,4 +5,8 @@ typedef long long LL;
 #define all(x) (x).begin(),(x).end()
 
 int main() {
+  LL n, k; cin >> n >> k;
+  vector<LL> a(n);
+  rep(i, n) cin >> a[i];
+  
 }

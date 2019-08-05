@@ -5,4 +5,7 @@ typedef long long LL;
 #define all(x) (x).begin(),(x).end()
 
 int main() {
+  int a, b, c;
+  cin >> a >> b >> c;
+  cout << max(c - (a - b), 0) << endl;
 }
