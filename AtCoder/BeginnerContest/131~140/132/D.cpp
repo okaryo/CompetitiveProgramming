@@ -1,27 +1,33 @@
 #include <bits/stdc++.h>
-typedef long long LL;
 using namespace std;
+typedef long long LL;
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define all(x) (x).begin(),(x).end()
 
 const LL mod = 1e9 + 7;
 LL dp[2010][2010];
+
+void make_comb() {
+  for (int i = 0; i <= 2000; i ++) {
+    for (int j = 0; j <= 2000; j ++) dp[i][j] = 0;
+  }
+  dp[0][0] = 1;
+  for (int i = 1; i <= 2000; i ++) {
+    for (int j = 0; j <= i; j ++) {
+      if (j == 0) dp[i][j] = dp[i - 1][j];
+      else if (j == i) dp[i][j] = dp[i - 1][j - 1];
+      else dp[i][j] = (dp[i - 1][j - 1] + dp[i - 1][j]) % mod;
+    }
+  }
+}
 
 int main() {
   int n, k;
   cin >> n >> k;
 
-  for (int i = 0; i <= n; i ++) {
-    for (int j = 0; j <= n; j ++) dp[i][j] = 0;
-  }
-  dp[1][1] = 1, dp[1][2] = 2;
-  dp[2][2] = 1, dp[2][3] = 2;
-  for (int i = 1; i < n; i ++) {
-    for (int j = i; j < n; j ++) {
-    }
-  }
+  make_comb();
 
-  
-  /*for (int i = 1; i <= n; i ++) {
-    cout << dp[i][n] << endl;
-  }*/
-  cout << dp[1][n] << endl;
+  for (int i = 1; i <= k; i ++) {
+    cout << dp[n - k + 1][i] * dp[k - 1][i - 1] % mod << endl;
+  }
 }

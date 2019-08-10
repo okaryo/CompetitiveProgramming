@@ -8,13 +8,26 @@ int main() {
 }
 
 /* ----------------------------------------- */
-
+// 最小公倍数
 int gcd(int a, int b) {
   return b ? gcd(b, a % b) : a;
 }
 
+// 昇順の優先度付きキュー
 priority_queue<int, vector<int>, greater<int>> pq;
 
+// 繰り返し二乗法
+LL RS(LL n, LL p, LL mod) {
+  if (p == 0) return 1;
+  else if (p % 2 == 0) {
+    LL t = RS(n, p / 2, mod);
+    return t * t % mod;
+  } else {
+    return n * RS(n, p - 1, mod) % mod;
+  }
+}
+
+// にぶたん
 int binarySearch (vector<int> a, int n, int key) {
   int left = 0;
   int right = n;
@@ -28,6 +41,7 @@ int binarySearch (vector<int> a, int n, int key) {
   return 0;
 }
 
+// Union-Find
 int find_root(int x) {
   if (p[x] != x) p[x] = find_root(p[x]);
   return p[x];
@@ -86,6 +100,7 @@ class DisjointSet {
     }
 };
 
+//  ワーシャルフロイド法
 void warshall_floyd(int n) {
   for (int k = 0; k < n; k++){       // 経由する頂点
     for (int i = 0; i < n; i++) {    // 始点
