@@ -57,7 +57,7 @@ void unite(int x, int y) {
   }
 }
 
-class DisjointSet {
+struct DisjointSet {
   public:
     vector<int> rank, p;
 
