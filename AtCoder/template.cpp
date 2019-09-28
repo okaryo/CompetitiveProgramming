@@ -8,6 +8,8 @@ int main() {
 }
 
 /* ----------------------------------------- */
+cout << setprecision(15) << ans << endl;
+
 // 最小公倍数
 int gcd(int a, int b) {
   return b ? gcd(b, a % b) : a;
