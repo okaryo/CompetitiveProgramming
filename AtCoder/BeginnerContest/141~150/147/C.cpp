@@ -6,26 +6,29 @@ typedef long long LL;
 
 int main() {
   int n; cin >> n;
-  vector<int> honest(n);
-  vector<int> not_honest(n);
+  vector<int> a(n);
+  vector<vector<int>> x(n, vector<int>(n));
+  vector<vector<int>> y(n, vector<int>(n));
   for (int i = 0; i < n; i ++) {
-    int t; cin >> t;
-    for (int j = 0; j < t; j ++) {
-      int a, b;
-      cin >> a >> b;
-      a --;
-      if (b) honest[a] ++;
-      else not_honest[a] ++; 
+    cin >> a[i];
+    for (int j = 0; j < a[i]; j ++) {
+      cin >> x[i][j] >> y[i][j];
+      x[i][j] --;
     }
   }
 
-  int t = 0, sum = 0;
-  for (int i = 0; i < n; i ++) {
-    if (honest[i] && not_honest[i]) {
-      sum ++;
-      t = max(t, min(honest[i], not_honest[i]));
+  int ans = 0;
+  for (int bit = 0; bit < (1 << n); bit ++) {
+    bool ok = true;
+    int sum = __builtin_popcount(bit);
+    for (int i = 0; i < n; i ++) {
+      if (!(bit & (1 << i))) continue;
+      for (int j = 0; j < a[i]; j ++) {
+        if (((bit >> (x[i][j])) & 1)  ^ y[i][j]) ok = false;
+      }
     }
+    if (ok) ans = max(ans, sum);
   }
 
-  cout << n - max(t, sum) << endl;
+  cout << ans << endl;
 }
