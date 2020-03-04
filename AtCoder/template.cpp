@@ -10,6 +10,8 @@ int main() {
 /* ----------------------------------------- */
 cout << setprecision(15) << ans << endl;
 
+const long double PI = (acos(-1));
+
 // 最大公約数
 int gcd(int a, int b) {
   return b ? gcd(b, a % b) : a;
