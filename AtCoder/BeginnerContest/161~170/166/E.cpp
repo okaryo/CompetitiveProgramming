@@ -5,5 +5,14 @@ typedef long long LL;
 #define all(x) (x).begin(),(x).end()
 
 int main() {
-  LL n; cin >> n;
+  int n; cin >> n;
+  map<int, int> mp;
+  LL ans = 0;
+  for (int i = 0; i < n; i ++) {
+    int a; cin >> a;
+    ans += mp[i - a];
+    mp[i + a] ++;
+  }
+
+  cout << ans << endl;
 }
