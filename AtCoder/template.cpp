@@ -1,6 +1,30 @@
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <stack>
+#include <algorithm>
+#include <cmath>
+#include <queue>
+#include <map>
+#include <set>
+#include <cstdlib>
+#include <bitset>
+#include <tuple>
+#include <assert.h>
+#include <deque>
+#include <bitset>
+#include <iomanip>
+#include <limits>
+#include <chrono>
+#include <random>
+#include <array>
+#include <unordered_map>
+#include <functional>
+#include <complex>
+#include <numeric>
 using namespace std;
-typedef long long LL;
+typedef long long ll;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define all(x) (x).begin(),(x).end()
 
@@ -21,10 +45,10 @@ int gcd(int a, int b) {
 priority_queue<int, vector<int>, greater<int>> pq;
 
 // 繰り返し二乗法
-LL RS(LL n, LL p, LL mod) {
+ll RS(ll n, ll p, ll mod) {
   if (p == 0) return 1;
   else if (p % 2 == 0) {
-    LL t = RS(n, p / 2, mod);
+    ll t = RS(n, p / 2, mod);
     return t * t % mod;
   } else {
     return n * RS(n, p - 1, mod) % mod;
