@@ -29,4 +29,11 @@ typedef long long ll;
 #define all(x) (x).begin(),(x).end()
 
 int main() {
+  string n; cin >> n;
+  int last = n.size() - 1;
+  string ans = "hon";
+  if (n[last] == '3') ans = "bon";
+  else if (n[last] == '0' || n[last] == '1' || n[last] == '6' || n[last] == '8') ans = "pon";
+
+  cout << ans << endl;
 }
