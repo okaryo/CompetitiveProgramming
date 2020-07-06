@@ -39,7 +39,7 @@ class PriorityQueue
     tmp_node = @heap.pop
 
     tmp_index = 0
-    while (tmp_index * 2 + 1) < size do
+    while (tmp_index * 2 + 1) < size
       tmp_left_child_index  = tmp_index * 2 + 1
       tmp_right_child_index = tmp_index * 2 + 2
       min_child_index = tmp_left_child_index
