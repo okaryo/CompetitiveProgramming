@@ -24,7 +24,11 @@ class PriorityQueue
     while new_node_index > 0
       parent_node_index = (new_node_index - 1) / 2
 
-      break if @heap[parent_node_index].first <= value.first
+      if array_value?
+        break if @heap[parent_node_index].first <= value.first
+      else
+        break if @heap[parent_node_index] <= value
+      end
 
       @heap[parent_node_index], @heap[new_node_index] = @heap[new_node_index], @heap[parent_node_index]
       new_node_index = parent_node_index
@@ -44,11 +48,17 @@ class PriorityQueue
       tmp_right_child_index = tmp_index * 2 + 2
       min_child_index = tmp_left_child_index
 
-      if tmp_right_child_index < size && @heap[tmp_left_child_index].first > @heap[tmp_right_child_index].first
-        min_child_index = tmp_right_child_index
+      if array_value?
+        if tmp_right_child_index < size && @heap[tmp_left_child_index].first > @heap[tmp_right_child_index].first
+          min_child_index = tmp_right_child_index
+        end
+        break if @heap[min_child_index].first >= tmp_node.first
+      else
+        if tmp_right_child_index < size && @heap[tmp_left_child_index] > @heap[tmp_right_child_index]
+          min_child_index = tmp_right_child_index
+        end
+        break if @heap[min_child_index] >= tmp_node
       end
-
-      break if @heap[min_child_index].first >= tmp_node.first
 
       @heap[tmp_index] = @heap[min_child_index]
       tmp_index = min_child_index
@@ -57,6 +67,13 @@ class PriorityQueue
     @heap[tmp_index] = tmp_node unless empty?
 
     min
+  end
+
+  private
+
+  def array_value?
+    return false if empty?
+    @heap.first.instance_of?(Array)
   end
 end
 
