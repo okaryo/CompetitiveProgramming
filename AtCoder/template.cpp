@@ -1,31 +1,8 @@
-#include <cstdio>
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <stack>
-#include <algorithm>
-#include <cmath>
-#include <queue>
-#include <map>
-#include <set>
-#include <cstdlib>
-#include <bitset>
-#include <tuple>
-#include <assert.h>
-#include <deque>
-#include <bitset>
-#include <iomanip>
-#include <limits>
-#include <chrono>
-#include <random>
-#include <array>
-#include <unordered_map>
-#include <functional>
-#include <complex>
-#include <numeric>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep2(i, s, n) for(int i = (s); i < int(n); i++)
 #define all(x) (x).begin(),(x).end()
 
 int main() {
@@ -45,6 +22,8 @@ int gcd(int a, int b) {
 priority_queue<int, vector<int>, greater<int>> pq;
 
 // 繰り返し二乗法
+// 冪乗を高速に計算する
+// https://qiita.com/drken/items/3b4fdf0a78e7a138cd9a#4-%E7%B4%AF%E4%B9%97-an
 ll RS(ll n, ll p, ll mod) {
   if (p == 0) return 1;
   else if (p % 2 == 0) {
