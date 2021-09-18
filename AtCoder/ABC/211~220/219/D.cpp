@@ -20,12 +20,9 @@ int main() {
   dp[0][0][0] = 0;
   rep(i, n) rep(j, 310) rep(k, 310) {
     dp[i+1][j][k] = min(dp[i+1][j][k], dp[i][j][k]);
-    if (j >= a[i] && k >= b[i]) dp[i+1][j][k] = min(dp[i+1][j][k], dp[i][j - a[i]][k - b[i]] + 1);
+    dp[i+1][min(j+a[i], x)][min(k+b[i], y)] = min(dp[i][j][k] + 1, dp[i+1][min(j+a[i], x)][min(k+b[i], y)]);
   }
-  ll ans = INF;
-  for (int i = x; i < 310; i++) for (int j = y; j < 310; j++) {
-    ans = min(ans, dp[n][i][j]);
-  }
+  ll ans = dp[n][x][y];
   if (ans == INF) {
     cout << -1 << endl;
   } else {
